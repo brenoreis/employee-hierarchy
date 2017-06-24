@@ -6,21 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by breno.pinto on 22/6/17.
  */
 @RestController
+@RequestMapping(value = "/employees-hierarchy")
 public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
 
-    @RequestMapping(value = "/employees-hierarchy", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/health-check", method = RequestMethod.GET)
+    public ResponseEntity<String> getHealthCheck() {
+        return new ResponseEntity<>("employees hierarchy backend is up and running", HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getEmployeeHierarchy(@RequestBody String payload) throws ValidationException {
         try {
             return new ResponseEntity<>(employeeService.getEmployeeHierarchy(payload), HttpStatus.OK);

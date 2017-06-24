@@ -19,4 +19,6 @@ public interface EmployeeRepository extends Repository<Employee, Long> {
     List<Employee> findAll();
 
     Long count();
+
+    void deleteAllInBatch();
 }

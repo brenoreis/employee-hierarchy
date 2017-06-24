@@ -51,4 +51,10 @@ public class EmployeeServiceIntegrationTest {
         employeeService.getEmployeeHierarchy(result);
     }
 
+    @Test(expected = ValidationException.class)
+    public void shouldThrowExceptionWhenDuplicateId() throws IOException, ValidationException {
+        String result = readFile(getClass().getClassLoader().getResource("duplicate-id-input.csv").getPath(), Charset.defaultCharset());
+        employeeService.getEmployeeHierarchy(result);
+    }
+
 }
