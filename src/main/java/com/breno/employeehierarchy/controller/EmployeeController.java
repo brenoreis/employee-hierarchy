@@ -23,7 +23,7 @@ public class EmployeeController {
         return new ResponseEntity<>("employees hierarchy backend is up and running", HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getEmployeeHierarchy(@RequestBody String payload) throws ValidationException {
         try {
